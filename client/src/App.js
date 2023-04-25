@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from './axios'
+import { Table } from "react-bootstrap";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -11,7 +12,7 @@ function App() {
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/users');
+        const res = await axios.get('api/users');
         const data1 = await res.data;
         setUsers(data1);
         // console.log(res);
@@ -24,7 +25,7 @@ function App() {
     getUsers();
     const getMaleUsers = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/male-users');
+        const res = await axios.get('api/male-users');
         const data3 = await res.data;
         setMaleUsers(data3);
         // console.log(data3);
@@ -37,7 +38,7 @@ function App() {
 
     const getMusers = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/quote-users');
+        const res = await axios.get('api/quote-users');
         const data4 = await res.data;
         setMUsers(data4);
         // console.log(data3);
@@ -50,7 +51,7 @@ function App() {
 
     const getcarUsers = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/car-users');
+        const res = await axios.get('api/car-users');
         const data1 = await res.data;
         setcarUsers(data1);
         // console.log(data3);
@@ -63,7 +64,7 @@ function App() {
 
     const getTopCities = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/topCities');
+        const res = await axios.get('api/topCities');
         const data2 = await res.data;
         setCities(data2);
         console.log(cities)
@@ -73,22 +74,22 @@ function App() {
       }
     }
     getTopCities();
-  }, []);
+  });
 
   return (
     <>
       <div>
         <h2>Users which have income lower than $5 USD and have car brand "BMW" or "Mercedes".</h2>
-        <table>
+        <Table stripped bordered hover size="sm">
           <thead>
             <tr>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Email</th>
-              <th>Gender</th>
-              <th>Car</th>
-              <th>Income</th>
-              <th>Phone</th>
+              <th width="15%">First Name</th>
+              <th width="15%">Last Name</th>
+              <th width="30%">Email</th>
+              <th width="10%">Gender</th>
+              <th width="10%">Car</th>
+              <th width="10%">Income</th>
+              <th width="10%">Phone</th>
             </tr>
           </thead>
           <tbody>
@@ -104,11 +105,11 @@ function App() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </Table>
       </div>
       <div>
         <h2>Male User which have phone price greater than 10,000</h2>
-        <table>
+        <Table stripped bordered hover size="sm" variant="dark">
           <thead>
             <tr>
               <th>First Name</th>
@@ -129,18 +130,18 @@ function App() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </Table>
       </div>
 
       <div>
         <h2>Users whose last name starts with “M” and has a quote character length greater than 15 and email includes his/her last name.</h2>
-        <table>
+        <Table stripped bordered hover size="sm">
           <thead>
             <tr>
               <th>First Name</th>
               <th>Last Name</th>
               <th>Email</th>
-              <th>Gender</th>
+              <th>Quote</th>
             </tr>
           </thead>
           <tbody>
@@ -153,13 +154,13 @@ function App() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </Table>
       </div>
       <div>
         <h2>
           Users which have a car of brand “BMW”, “Mercedes” or “Audi” and whose email does not include any digit.
         </h2>
-        <table>
+        <Table stripped bordered hover size="sm" variant='dark'>
           <thead>
             <tr>
               <th>First Name</th>
@@ -178,10 +179,10 @@ function App() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </Table>
       </div>
       <h1>Top Cities</h1>
-      <table>
+      <Table stripped bordered hover size="sm" >
         <thead>
           <tr>
             <th>City</th>
@@ -200,7 +201,7 @@ function App() {
             </tr>
           ))}
         </tbody>
-      </table>
+      </Table>
     </>
   );
 }
